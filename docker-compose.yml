@@ -1,0 +1,65 @@
+version: '3.7'
+
+services:
+  mysqldb:
+    image: mysql
+    restart: always
+    environment:
+      - MYSQL_DATABASE=$MYSQL_DB
+      - MYSQL_USER=$MYSQL_USER
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+      - MYSQL_ROOT_PASSWORD=$MYSQL_PASSWORD
+    ports:
+      - "3306:${MYSQL_PORT}"
+    volumes:
+      - ./mysqldb_data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    env_file:
+      - ./clients/.env
+
+#  adminer:
+#    image: adminer
+#    restart: always
+#    ports:
+#      - "8080:${ADMINER_PORT}"
+#    environment:
+#      - ADMINER_DEFAULT_SERVER=mysqldb
+#    env_file:
+#      - ./clients/.env
+#
+#  clients_app:
+#    container_name: clients_app
+#    restart: always
+#    depends_on:
+#      - mysqldb
+#    build:
+#      context: clients
+#      target: dependencies
+#    ports:
+#      - ${PORT}:${PORT}
+#      - "9229:9229"
+#    env_file:
+#      - ./clients/.env
+#    volumes:
+#      - ./:/home/node/app
+#    command: dumb-init node ace serve --watch --node-args="--inspect=0.0.0.0"
+#
+#  dataanalysis_app:
+#    container_name: dataanalysis_app
+#    restart: always
+#    depends_on:
+#      - mysqldb
+#    build:
+#      context: dataanalysis
+#      target: dependencies
+#    ports:
+#      - ${PORT}:${PORT}
+#      - "9229:9230"
+#    env_file:
+#      - ./dataanalysis/.env
+#    volumes:
+#      - ./:/home/node/app
+#    command: dumb-init node ace serve --watch --node-args="--inspect=0.0.0.0"
+
+volumes:
+  mysqldb_volume:
