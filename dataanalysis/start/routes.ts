@@ -25,7 +25,7 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
-Route.get('/kpi', async (ctx) => {
+Route.get('/data-analysis', async (ctx) => {
   return new KpisController().index(ctx)
 })
 

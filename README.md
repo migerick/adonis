@@ -22,7 +22,6 @@ Both have microservices that allow you to manage the data of each one.
 - Git
 - GitHub
 - Postman
-- AWS EC2
 
 ## Installation
 - Clone the repository
@@ -49,33 +48,24 @@ cp .env.example .env
 
 - Run the project
 
+In each microservice run the following command:
+
 ```bash
-npm run dev
+node ace serve --watch
 ```
 
 ## Usage
-- Create the database
-
-```bash
-npm run db:create
-```
 
 - Run migrations
 
 ```bash
-npm run migration:run
+node ace migration:run
 ```
 
 - Run seeds
 
 ```bash
-npm run seed
-```
-
-- Run the project
-
-```bash
-npm run dev
+node ace db:seed
 ```
 
 ## Docker
@@ -91,34 +81,16 @@ docker-compose build
 docker-compose up
 ```
 
-- Create the database
-
-```bash
-docker-compose exec app npm run db:create
-```
-
 - Run migrations
 
 ```bash
-docker-compose exec app npm run migration:run
+docker-compose exec client node ace migration:run
 ```
 
 - Run seeds
 
 ```bash
-docker-compose exec app npm run seed
-```
-
-- Run the project
-
-```bash
-docker-compose exec app npm run dev
-```
-
-## Tests
-
-```bash
-npm run test
+docker-compose exec client node ace db:seed
 ```
 
 ## Routes
@@ -127,6 +99,7 @@ Client routes
 | Method | Route | Description |
 | --- | --- | --- |
 | GET | /clients | Get all clients |
+| GET | /clients/?page=1 | Get all clients with pagination |
 | GET | /clients/:id | Get a client by id |
 | POST | /clients | Create a client |
 | PUT | /clients/:id | Update a client by id |
@@ -142,7 +115,6 @@ Data analysis routes
 ## API Documentation
 - [Postman](https://documenter.getpostman.com/view/13263160/Tz5qZK7o)
 - [Swagger](https://app.swaggerhub.com/apis-docs/migerick/promart-challenge/1.0.0)
-- [AWS EC2](http://ec2-18-117-84-227.us-east-2.compute.amazonaws.com:3333/docs)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
