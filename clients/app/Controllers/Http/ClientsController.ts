@@ -3,17 +3,22 @@
 import Client from 'App/Models/Client'
 
 export default class ClientsController {
-  public async index({ request, response }) {
-    const page = request.input('page', 1)
-    const perPage = 10
+  public async index({request, response}) {
+    const page = request.input('page')
 
-    const posts = await Client.query().paginate(page, perPage)
+    let clients: Client[]
+    if (page) {
+      const perPage = 10
+      clients = await Client.query().paginate(page, perPage)
+    } else {
+      clients = await Client.all()
+    }
 
-    return response.ok(posts)
+    return response.ok(clients)
   }
 
-  public async store({ request, response }) {
-    const payload: Client = await request.validate({ schema: Client.validator })
+  public async store({request, response}) {
+    const payload: Client = await request.validate({schema: Client.validator})
     console.log(payload)
 
     const client: Client = new Client()
@@ -24,30 +29,28 @@ export default class ClientsController {
 
     await client.save()
 
-    // const client: Client = await Client.create(payload)
-    console.log("+++++++++++++++++++++++++++++++++++++++++++==",client)
     return response.ok(client)
   }
 
-  public async show({ params, response }) {
-    const { id }: { id: Number } = params
+  public async show({params, response}) {
+    const {id}: { id: Number } = params
 
     const client: Client = await Client.findOrFail(id)
     if (!client) {
-      return response.notFound({ message: 'Post not found' })
+      return response.notFound({message: 'Post not found'})
     }
 
     return response.ok(client)
   }
 
-  public async update({ request, params, response }) {
-    const payload: Client = await request.validate({ schema: Client.validator })
+  public async update({request, params, response}) {
+    const payload: Client = await request.validate({schema: Client.validator})
 
-    const { id }: { id: Number } = params
+    const {id}: { id: Number } = params
 
     const client: Client = await Client.findOrFail(id)
     if (!client) {
-      return response.notFound({ message: 'Post not found' })
+      return response.notFound({message: 'Post not found'})
     }
 
     payload.birthdate = new Date(payload.birthdate)
@@ -59,16 +62,16 @@ export default class ClientsController {
     return response.ok(client)
   }
 
-  public async destroy({ params, response }) {
-    const { id }: { id: Number } = params
+  public async destroy({params, response}) {
+    const {id}: { id: Number } = params
 
     const client: Client = await Client.findOrFail(id)
     if (!client) {
-      return response.notFound({ message: 'Post not found' })
+      return response.notFound({message: 'Post not found'})
     }
 
     await client.delete()
 
-    return response.ok({ message: 'Post deleted successfully.' })
+    return response.ok({message: 'Post deleted successfully.'})
   }
 }
