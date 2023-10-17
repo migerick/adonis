@@ -113,7 +113,7 @@ Data analysis routes
 
 
 ## API Documentation
-- [Postman](https://documenter.getpostman.com/view/13263160/Tz5qZK7o)
+- [Postman](https://elements.getpostman.com/redirect?entityId=8084707-7c29bb23-86fc-4320-847b-d73cc416452d&entityType=collection)
 - [Swagger](https://app.swaggerhub.com/apis-docs/migerick/promart-challenge/1.0.0)
 
 ## License

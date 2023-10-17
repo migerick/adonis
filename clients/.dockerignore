@@ -1,5 +1,6 @@
 # Adonis default .gitignore ignores
 node_modules
+mysqldb_data
 build
 coverage
 .vscode
@@ -17,3 +18,5 @@ docker-compose*
 *.md
 .git
 .gitignore
+
+
