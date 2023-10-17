@@ -25,7 +25,7 @@ services:
 #      - ADMINER_DEFAULT_SERVER=mysqldb
 #    env_file:
 #      - .env
-
+#
 #  clients_app:
 #    container_name: clients_app
 #    restart: always
