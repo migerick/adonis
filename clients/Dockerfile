@@ -1,4 +1,4 @@
-ARG NODE_IMAGE=node:lts-alpine
+ARG NODE_IMAGE=node:20.8
 
 FROM $NODE_IMAGE AS base
 RUN apk --no-cache add dumb-init

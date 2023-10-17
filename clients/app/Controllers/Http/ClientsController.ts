@@ -13,9 +13,19 @@ export default class ClientsController {
   }
 
   public async store({ request, response }) {
-    const payload: any = await request.validate({ schema: Client.validator })
-    const client: Client = await Client.create(payload)
+    const payload: Client = await request.validate({ schema: Client.validator })
+    console.log(payload)
 
+    const client: Client = new Client()
+    client.name = payload.name
+    client.surname = payload.surname
+    client.motherSurname = payload.motherSurname
+    client.birthdate = new Date(payload.birthdate)
+
+    await client.save()
+
+    // const client: Client = await Client.create(payload)
+    console.log("+++++++++++++++++++++++++++++++++++++++++++==",client)
     return response.ok(client)
   }
 
@@ -31,7 +41,7 @@ export default class ClientsController {
   }
 
   public async update({ request, params, response }) {
-    const payload: any = await request.validate({ schema: Client.validator })
+    const payload: Client = await request.validate({ schema: Client.validator })
 
     const { id }: { id: Number } = params
 
@@ -40,6 +50,7 @@ export default class ClientsController {
       return response.notFound({ message: 'Post not found' })
     }
 
+    payload.birthdate = new Date(payload.birthdate)
     client.merge(payload)
     await client.save()
 
