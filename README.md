@@ -37,24 +37,38 @@ git clone https://github.com/migerick/adonis.git
 - Install dependencies
 
 ```bash
+cd clients
+npm install
+
+cd dataanalysis
 npm install
 ```
 
 - Create the .env file
 
+Each microservice has its own .env file, you must copy the .env.example file and rename it to .env
+
 ```bash
 cp .env.example .env
 ```
 
-- Run the project
+## Docker
 
-In each microservice run the following command:
+- Run the container
+
+Each microservice has its own docker-compose.yml file, you must run the following command in each microservice:
+
+
+``Docker: Init database for then run migrations.``
+
 
 ```bash
-node ace serve --watch
+docker-compose up
 ```
 
 ## Usage
+
+In clients microservice, you must create the database and run the migrations and seeds.
 
 - Run migrations
 
@@ -68,29 +82,16 @@ node ace migration:run
 node ace db:seed
 ```
 
-## Docker
-- Build the image
+- Run the project
+
+In each microservice run the following command:
 
 ```bash
-docker-compose build
-```
+cd clients
+node ace serve --watch
 
-- Run the container
-
-```bash
-docker-compose up
-```
-
-- Run migrations
-
-```bash
-docker-compose exec client node ace migration:run
-```
-
-- Run seeds
-
-```bash
-docker-compose exec client node ace db:seed
+cd dataanalysis
+node ace serve --watch
 ```
 
 ## Routes
@@ -114,7 +115,7 @@ Data analysis routes
 
 ## API Documentation
 - [Postman](https://elements.getpostman.com/redirect?entityId=8084707-7c29bb23-86fc-4320-847b-d73cc416452d&entityType=collection)
-- [Swagger](https://app.swaggerhub.com/apis-docs/migerick/promart-challenge/1.0.0)
+- [Swagger]()
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
