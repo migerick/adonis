@@ -56,13 +56,13 @@ cp .env.example .env
 
 - Run the container
 
-Each microservice has its own docker-compose.yml file, you must run the following command in each microservice:
-
+In clients microservice, you must create the database and run the migrations and seeds.
 
 ``Docker: Init database for then run migrations.``
 
 
 ```bash
+
 docker-compose up
 ```
 
